@@ -1,6 +1,9 @@
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
+import LandingPage from './pages/LandingPage'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-	<StrictMode></StrictMode>,
+createRoot(document.getElementById('root') as HTMLElement).render(
+	<StrictMode>
+		<LandingPage />
+	</StrictMode>,
 )

@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.A4Paper{
+	height: 842px;
+	width: 595px;
+	/* to centre page on screen*/
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	box-shadow: 10px 5px 5px grey;
+	overflow: hidden;
+}
+
+.img{
+	width: 100%;
+}
+.altura{
+	padding: 10px;
+}
