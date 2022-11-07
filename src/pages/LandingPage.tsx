@@ -223,6 +223,9 @@ const LandingPage = () => {
 										setFile(files)
 									}}
 									openRef={openRef}
+									accept={{
+										'image/*': [], // All images
+									}}
 								>
 									<div>
 										{filePath ? (
