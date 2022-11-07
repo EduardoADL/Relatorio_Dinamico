@@ -1,6 +1,8 @@
 import './LandingPage.css'
 import { useState, useRef, useEffect } from 'react'
+//dropzone serve para adicionar imagens
 import { Dropzone, FileWithPath } from '@mantine/dropzone'
+//draggable torna elementos deslizaveis
 import Draggable from 'react-draggable'
 import { Modal, Checkbox } from '@mantine/core'
 import Graphic from '../components/graphic/Graphic'
@@ -40,11 +42,13 @@ const LandingPage = () => {
 	const openRef: any = useRef()
 	const printRef: any = useRef()
 
+	//useEffect feito para setar o caminho da imagem
 	useEffect(() => {
 		if (file.length === 0 || !file) return
 		setFilePath(URL.createObjectURL(file[0]))
 	}, [file])
 
+	//useEffect feito para definir largura da borda como 0 caso o usuario desmarque a checkbox
 	useEffect(() => {
 		if (!imgSettings.borda) {
 			setImgSettings({ ...imgSettings, larguraBorda: '0' })
@@ -121,12 +125,7 @@ const LandingPage = () => {
 				</button>
 				<ReactToPrint
 					trigger={() => {
-						return (
-							<button className='btnAdc'>SalvarPDF</button>
-							// <a style={{ border: '1px solid black', padding: '5px' }} href='#'>
-							// 	Salvar PDF
-							// </a>
-						)
+						return <button className='btnAdc'>SalvarPDF</button>
 					}}
 					content={() => printRef.current}
 				/>
