@@ -11,13 +11,25 @@
 	margin-left: auto;
 	margin-right: auto;
 	border: 1px solid black;
-	box-shadow: 10px 5px 5px grey;
 	overflow: hidden;
 }
 
+.ImageOptions{
+	padding: 10px;
+	padding-right: 30px;
+}
+.GraphicOptions{
+	padding: 10px;
+	padding-left: 30px;
+}
+.titleImg{
+	font-weight: bold;
+}
 .img{
 	width: 100%;
+	cursor:grab;
 }
-.altura{
-	padding: 10px;
+.img:active{
+	cursor:grabbing;
 }
+
