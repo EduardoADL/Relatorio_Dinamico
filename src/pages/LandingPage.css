@@ -1,19 +1,42 @@
+body{
+	background: #3b3737;
+}
 .container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
-
 .A4Paper{
-	height: 842px;
-	width: 595px;
-	/* to centre page on screen*/
-	margin-left: auto;
-	margin-right: auto;
 	border: 1px solid black;
 	overflow: hidden;
-}
 
+	background-color: #fff;
+	width: 210mm;
+	height: 297mm;
+}
+.button{
+	margin-bottom: 20%;
+	margin-top: 5%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.buttons{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.input{
+	padding: 5px;
+	border-radius: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	border: 1px solid rgb(184, 183, 183);
+}
+.titleInput{
+	font-size: 14px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
 .ImageOptions{
 	padding: 10px;
 	padding-right: 30px;
@@ -25,6 +48,11 @@
 .titleImg{
 	font-weight: bold;
 }
+.Image{
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
+
 .img{
 	width: 100%;
 	cursor:grab;

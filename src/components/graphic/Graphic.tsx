@@ -1,4 +1,5 @@
 import { FC } from 'react'
+//Echats biblioteca de gráficos
 import ReactECharts from 'echarts-for-react'
 
 interface GraphicsParameters {
@@ -6,6 +7,11 @@ interface GraphicsParameters {
 	altura: string
 	largura: string
 	border: string
+}
+const data: any = []
+//função para gerar numeros randomicos e adicionar ao array data
+for (let i = 0; i < 6; i++) {
+	data.push(Math.floor(Math.random() * (1000 - 100)))
 }
 const Graphic: FC<GraphicsParameters> = ({
 	titulo,
@@ -38,7 +44,7 @@ const Graphic: FC<GraphicsParameters> = ({
 					},
 					series: [
 						{
-							data: [150, 230, 224, 218, 135, 147, 260],
+							data: data,
 							type: 'line',
 						},
 					],

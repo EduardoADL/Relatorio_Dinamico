@@ -4,8 +4,9 @@ import { useState, useRef, useEffect } from 'react'
 import { Dropzone, FileWithPath } from '@mantine/dropzone'
 //draggable torna elementos deslizaveis
 import Draggable from 'react-draggable'
-import { Modal, Checkbox } from '@mantine/core'
+import { Modal, Checkbox, Button } from '@mantine/core'
 import Graphic from '../components/graphic/Graphic'
+//react-to-print serve para a impressão
 import ReactToPrint from 'react-to-print'
 
 interface componentSettings {
@@ -67,6 +68,30 @@ const LandingPage = () => {
 
 	return (
 		<div className='container'>
+			<div className='buttons'>
+				<Button
+					className='button'
+					variant='gradient'
+					gradient={{ from: 'indigo', to: 'cyan' }}
+					onClick={() => setOpened(true)}
+				>
+					Adicionar
+				</Button>
+				<ReactToPrint
+					trigger={() => {
+						return (
+							<Button
+								className='button'
+								variant='gradient'
+								gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+							>
+								Imprimir
+							</Button>
+						)
+					}}
+					content={() => printRef.current}
+				/>
+			</div>
 			<div className='A4Paper'>
 				<div ref={printRef}>
 					{openImage ? (
@@ -118,27 +143,19 @@ const LandingPage = () => {
 					) : null}
 				</div>
 			</div>
-
 			<div>
-				<button onClick={() => setOpened(true)} className='btnAdc'>
-					Adicionar
-				</button>
-				<ReactToPrint
-					trigger={() => {
-						return <button className='btnAdc'>SalvarPDF</button>
-					}}
-					content={() => printRef.current}
-				/>
+				{/* COMEÇO DO MODAL */}
 				<Modal
 					opened={opened}
 					onClose={() => setOpened(false)}
 					title='Configure seus componentes'
+					size='auto'
 				>
 					<div
 						style={{
 							display: 'flex',
-							flexDirection: 'row',
 							justifyContent: 'space-around',
+							flexDirection: 'row',
 						}}
 					>
 						<div className='ImageOptions'>
@@ -149,10 +166,24 @@ const LandingPage = () => {
 									setOpenImage(checado.currentTarget.checked)
 								}
 							/>
-
 							<div>
-								<p>Largura(px)</p>
+								<p className='titleInput'>Título da Imagem</p>
 								<input
+									className='input'
+									value={imgSettings.titulo}
+									onChange={(text) =>
+										setImgSettings({
+											...imgSettings,
+											titulo: text.target.value,
+										})
+									}
+									type='text'
+								/>
+							</div>
+							<div>
+								<p className='titleInput'>Largura(px)</p>
+								<input
+									className='input'
 									value={imgSettings.largura}
 									onChange={(text) =>
 										setImgSettings({
@@ -164,8 +195,9 @@ const LandingPage = () => {
 								/>
 							</div>
 							<div>
-								<p>Altura(px)</p>
+								<p className='titleInput'>Altura(px)</p>
 								<input
+									className='input'
 									value={imgSettings.altura}
 									onChange={(text) =>
 										setImgSettings({
@@ -177,7 +209,7 @@ const LandingPage = () => {
 								/>
 							</div>
 							<div>
-								<p>Borda?</p>
+								<p className='titleInput'>Borda?</p>
 								<Checkbox
 									checked={imgSettings.borda}
 									onChange={(checado) =>
@@ -190,8 +222,9 @@ const LandingPage = () => {
 							</div>
 							{imgSettings.borda ? (
 								<div>
-									<p>Tamanho borda(px)</p>
+									<p className='titleInput'>Tamanho borda(px)</p>
 									<input
+										className='input'
 										value={imgSettings.larguraBorda}
 										onChange={(text) =>
 											setImgSettings({
@@ -203,19 +236,7 @@ const LandingPage = () => {
 									/>
 								</div>
 							) : null}
-							<div>
-								<p>Titulo da Imagem</p>
-								<input
-									value={imgSettings.titulo}
-									onChange={(text) =>
-										setImgSettings({
-											...imgSettings,
-											titulo: text.target.value,
-										})
-									}
-									type='text'
-								/>
-							</div>
+
 							<div className='Image'>
 								<Dropzone
 									onDrop={(files) => {
@@ -223,10 +244,10 @@ const LandingPage = () => {
 									}}
 									openRef={openRef}
 									accept={{
-										'image/*': [], // All images
+										'image/*': [],
 									}}
 								>
-									<div>
+									<div style={{ width: '150px' }}>
 										{filePath ? (
 											<img
 												id='img'
@@ -235,15 +256,15 @@ const LandingPage = () => {
 												alt='imagem'
 											/>
 										) : (
-											<p>arraste uma imagem</p>
+											<p className='titleInput'>Arraste uma imagem</p>
 										)}
 									</div>
 								</Dropzone>
 							</div>
 
-							<button onClick={() => openRef.current()}>
+							<Button onClick={() => openRef.current()}>
 								Selecionar uma Imagem
-							</button>
+							</Button>
 						</div>
 						<div className='GraphicOptions'>
 							<Checkbox
@@ -253,10 +274,24 @@ const LandingPage = () => {
 									setOpenGraphic(checado.currentTarget.checked)
 								}
 							/>
-
 							<div>
-								<p>Largura(px)</p>
+								<p className='titleInput'>Título do gráfico</p>
 								<input
+									className='input'
+									value={graphicSettings.titulo}
+									onChange={(text) =>
+										setGraphicSettings({
+											...graphicSettings,
+											titulo: text.target.value,
+										})
+									}
+									type='text'
+								/>
+							</div>
+							<div>
+								<p className='titleInput'>Largura(px)</p>
+								<input
+									className='input'
 									value={graphicSettings.largura}
 									onChange={(text) =>
 										setGraphicSettings({
@@ -268,8 +303,9 @@ const LandingPage = () => {
 								/>
 							</div>
 							<div>
-								<p>Altura(px)</p>
+								<p className='titleInput'>Altura(px)</p>
 								<input
+									className='input'
 									value={graphicSettings.altura}
 									onChange={(text) =>
 										setGraphicSettings({
@@ -281,7 +317,7 @@ const LandingPage = () => {
 								/>
 							</div>
 							<div>
-								<p>Borda?</p>
+								<p className='titleInput'>Borda?</p>
 								<Checkbox
 									checked={graphicSettings.borda}
 									onChange={(checado) =>
@@ -294,8 +330,9 @@ const LandingPage = () => {
 							</div>
 							{graphicSettings.borda ? (
 								<div>
-									<p>Tamanho borda(px)</p>
+									<p className='titleInput'>Tamanho borda(px)</p>
 									<input
+										className='input'
 										value={graphicSettings.larguraBorda}
 										onChange={(text) =>
 											setGraphicSettings({
@@ -307,22 +344,16 @@ const LandingPage = () => {
 									/>
 								</div>
 							) : null}
-							<div>
-								<p>Titulo da Imagem</p>
-								<input
-									value={graphicSettings.titulo}
-									onChange={(text) =>
-										setGraphicSettings({
-											...graphicSettings,
-											titulo: text.target.value,
-										})
-									}
-									type='text'
-								/>
-							</div>
 						</div>
 					</div>
-					<button onClick={() => saveModal()}>Salvar</button>
+					<Button
+						style={{ marginLeft: '80%' }}
+						variant='gradient'
+						gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+						onClick={() => saveModal()}
+					>
+						Salvar
+					</Button>
 				</Modal>
 			</div>
 		</div>
